@@ -1,0 +1,35 @@
+{% load static %}
+
+
+<div id="surveyDivBlock" class="row mt-4">
+    <div class="col-md-12">
+        <div id="surveyApproveDivBlock" class="container text-start" style="display: none">
+            <!-- Форма с просьбой указания данных для регистрации -->
+            <form method="POST" id="surveyForm">
+                {% csrf_token %}
+                {% for question in survey %}
+                    <div class="row mt-2">
+                        <div class="col">
+                            <h5>{{ question.text }}</h5>
+                            {% for answer in question.surveyanswer_set.all %}
+                                <div class="form-check mx-4">
+                                    <label class="form-check-label"
+                                           for="question{{ question.pk }}-option{{ answer.pk }}">
+                                        <input class="form-check-input" type="radio" name="{{ question.text }}"
+                                               id="question{{ question.pk }}-option{{ answer.pk }}"
+                                               value="{{ answer.text }}">
+                                        {{ answer.text }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+                <br>
+                <button class="btn btn-dark approve-survey" href="{% url 'invitation:index' %}" type="submit">
+                    Подтвердить
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

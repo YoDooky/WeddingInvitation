@@ -1,0 +1,37 @@
+{% load static %}
+
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Мы рады сообщить Вам, что 31.07.2024 состоится
+            самое главное торжество в нашей жизни -
+            день нашей свадьбы.
+            Мы хотим, чтобы в этот день рядом с нами были
+            самые близкие и дорогие для нас люди.
+            Приглашаем Вас разделить с нами
+            радость этого незабываемого дня.</h4>
+        <img src="{% static 'deps/images/image-4.jpg' %}" class="img-fluid rounded" alt="Image 2">
+        <div class="form-group m-4">
+            <button type="submit" class="btn btn-dark btn-lg show-approve-invitation"
+                    href="{% url 'invitation:index' %}">Я приду!
+            </button>
+        </div>
+        <div id="invitationApproveDivBlock" class="container text-start" style="display: none">
+            <!-- Форма с просьбой указания данных для регистрации -->
+            <form method="POST" id="invitationForm">
+                {% csrf_token %}
+                <div class="form-group m-4">
+                    <input type="text" class="form-control" id="first_name_input1" placeholder="Введите имя">
+                </div>
+                <div class="form-group m-4">
+                    <input type="text" class="form-control" id="last_name_input2" placeholder="Введите фамилию">
+                </div>
+                <div class="form-group m-4">
+                    <button type="submit" class="btn btn-dark accept-invitation" href="{% url 'invitation:index' %}">
+                        Подтвердить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
